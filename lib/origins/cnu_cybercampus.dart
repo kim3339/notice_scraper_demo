@@ -1,5 +1,3 @@
-import 'dart:io';
-
 const loginUri = "dcs-lcms.cnu.ac.kr";
 const homeUri = "dcs-learning.cnu.ac.kr";
 const apiPath = "/api/v1";
