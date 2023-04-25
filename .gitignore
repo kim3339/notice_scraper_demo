@@ -9,7 +9,7 @@
 .history
 .svn/
 migrate_working_dir/
-lib\origins\private.dart
+/lib/origins/private.dart
 
 # IntelliJ related
 *.iml
