@@ -32,9 +32,7 @@ Future<List<Notice>> scrap() async {
       body: {'e': encryptData(inputs)});
   addCookies(cookies, response);
 
-  // 사이버캠퍼스 접속
-
-  // 공지 불러오기
+  // 로그인된 세션을 이용해 공지 불러오기
   response = await client.post(
       Uri.https(cc.homeUri, "${cc.apiPath}/term/getYearTermList"),
       headers: headerWithCookies(cookies));
@@ -61,25 +59,6 @@ Future<List<Notice>> scrap() async {
       HtmlUnescape().convert(const Utf8Decoder().convert(response.bodyBytes)));
 }
 
-/* 
-{
-  "row_idx":1,
-  "rseq":18,
-  "course_id":"202310UN001214-201800",
-  "course_nm":"ì»´í¨í°íë¡ê·¸
-  ëë°3",
-  "class_no":"00",
-  "boarditem_no":"TB_L_BOARDITEM284434",
-  "boarditem_title":"ì¤ê°ê³ ì¬ ê³µì§ì¬í­ìëë¤.",
-  "top_yn":"N",
-  "open_yn":null,
-  "file_yn":"N",
-  "insert_dt":"2023-04-17 15:36",
-  "writeruserno":"plas_ta2",
-  "read_yn":"N"
-} 
-*/
-
 List<Notice> parseNotices(String json) => jsonDecode(json)['body']["list"]
     .map<Notice>((e) => Notice(
         title: "${e['course_nm']}: ${e['boarditem_title']}",
@@ -105,9 +84,6 @@ Iterable<String>? getCookies(http.Response response) =>
         ?.replaceAll(', ', r'\\')
         .split(',')
         .map((e) => e.replaceAll(r'\\', ', '));
-
-String toCookieHeader(Iterable<Cookie> cookies) =>
-    cookies.map((e) => "${e.name}=${e.value}").join('; ');
 
 String encryptPassword(String key, String password) {
   final parsed = RSAKeyParser()
