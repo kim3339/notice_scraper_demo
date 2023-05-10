@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="notice_scraper"
+        android:label="Notice Scraper Demo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
